@@ -56,8 +56,29 @@ class LinkedLists {
   }
 
   // tail returns the last node in the list
-  tail() {
-    return this.listTail
+  tail(current = this.listHead) {
+
+    // return this.listTail
+    
+    // If tail is not constantly updated in the linked list
+    if (this.listHead === null) {
+      return null
+    }
+
+    if (current === this.listHead && current.nextNode === null) {
+      return current
+    }
+  
+    if (current === null) {
+      return
+    }
+
+    if (current.nextNode === null) {
+      return current
+    }
+
+    return this.tail(current.nextNode)
+
   }
 
   //  at(index) returns the node at the given index
@@ -140,6 +161,28 @@ class LinkedLists {
     return this.toString(current.nextNode, currentString);
   }
 
+  // insertAt(value, index) that inserts a new node with the provided value at the given index.
+  insertAt(value, index, current = this.listHead, backNode = this.listHead, currentIndex = 0) {
+
+    if (this.size() <= index) {
+      this.append(value);
+      return
+    }
+
+    if (current === null) {
+      return
+    }
+
+    if (index === currentIndex) {
+      value.nextNode = current;
+      backNode.nextNode = value;
+      return
+    }
+
+    this.insertAt(value, index, current.nextNode, current, currentIndex += 1);
+
+  } 
+
 }
 
 class Node {
@@ -164,11 +207,8 @@ linkedListA.append(d)
 linkedListA.append(e)
 linkedListA.append(f)
 
-const linkedListB = new LinkedLists();
-
 const linkedListAnswers = function () {
-  console.log(linkedListA.toString());
-  console.log(linkedListB.toString());
+ 
 }
 
 export default linkedListAnswers

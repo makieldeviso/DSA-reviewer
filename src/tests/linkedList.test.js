@@ -234,4 +234,38 @@ describe('Linked list exercise tests', () => {
     expect(linkedList.toString()).toMatch('(A) -> (B) -> (C) -> (D) -> (E) -> (F) -> null');
   })
 
+  it('Linked list can insert node', () => {
+    const linkedList = new LinkedLists();
+    const a = new Node('A');
+    const b = new Node('B');
+    const c = new Node('C');
+    const d = new Node('D');
+    const e = new Node('E');
+
+    linkedList.insertAt(a, 1);
+
+    expect(linkedList.at(0)).toBe(a);
+    expect(linkedList.at(1)).toBeNull();
+    
+    linkedList.insertAt(b, 1);
+    expect(linkedList.at(0)).toBe(a);
+    expect(a.nextNode).toBe(b);
+    expect(linkedList.at(1)).toBe(b);
+
+    linkedList.insertAt(c, 1);
+    expect(linkedList.at(1)).toBe(c);
+    expect(a.nextNode).toBe(c);
+    expect(c.nextNode).toBe(b);
+    
+    linkedList.insertAt(d, 3);
+    expect(linkedList.tail()).toBe(d);
+    expect(linkedList.at(3)).toBe(d);
+    expect(linkedList.at(2).nextNode).toBe(d);
+
+    linkedList.insertAt(e, 3);
+    expect(linkedList.at(3)).toBe(e);
+    expect(linkedList.size()).toBe(5);
+    expect(linkedList.at(3).nextNode).toBe(linkedList.at(4));
+  })
+
 })
